@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Products</title>
+</head>
+
+<body>
+    <h1>Products</h1>
+    <a href="{% url 'crudapp:product_create' %}">Add New Product</a>
+    <ul>
+        {% for product in products %}
+        <li>
+            {{ product.name }} - ${{ product.price }}
+            <a href="{% url 'crudapp:product_edit' product.id %}">Edit</a>
+            <form action="{% url 'crudapp:product_delete' product.id %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
